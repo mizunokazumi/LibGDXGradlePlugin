@@ -2,9 +2,8 @@ package com.github.blueboxware.gdxplugin.utils
 
 import com.badlogic.gdx.ApplicationAdapter
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration.disableAudio
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
 import com.badlogic.gdx.tools.hiero.BMFontUtil
 import com.badlogic.gdx.tools.hiero.HieroSettings
 import com.badlogic.gdx.tools.hiero.unicodefont.UnicodeFont
@@ -110,14 +109,10 @@ internal class FontGenerator(
       }
 
       val fontCreator = FontGenerator(settingsFile, outputSpecs)
-      val config = LwjglApplicationConfiguration().apply {
-        disableAudio = true
-        allowSoftwareMode = true
-        forceExit = false
-        width = 1
-        height = 1
+      val config = Lwjgl3ApplicationConfiguration().apply {
+        disableAudio(true)
       }
-      val app = LwjglApplication(fontCreator, config)
+      val app = Lwjgl3Application(fontCreator, config)
       Gdx.graphics.requestRendering()
       while (!fontCreator.done) {
         sleep(500)
